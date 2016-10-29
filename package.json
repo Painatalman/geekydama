@@ -10,7 +10,8 @@
     "build": "webpack",
     "serve": "webpack-dev-server --inline",
     "start": "npm watch",
-    "send-to-gh-pages": "git subtree push --prefix dist origin gh-pages"
+    "send-to-gh-pages": "git subtree push --prefix dist origin gh-pages",
+    "build-and-send-to-gh-pages": "npm run build && npm run send-to-gh-pages"
   },
   "keywords": [
     "generator",
