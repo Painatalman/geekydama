@@ -9,7 +9,8 @@
     "watch": "webpack -d --watch",
     "build": "webpack",
     "serve": "webpack-dev-server",
-    "start": "npm watch"
+    "start": "npm watch",
+    "send-to-gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [
     "generator",
