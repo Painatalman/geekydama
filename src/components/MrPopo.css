@@ -1,0 +1,45 @@
+$background-color: #000000;
+$background-color-alt: blue;
+
+.mr-popo {
+  background: $background-color;
+  width: 50px;
+  
+  &--blue {
+    background: $background-color-alt;
+  }
+}
+
+.mr-popo--large {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 30%;
+}
+
+.black {
+  background: black;
+}
+.centered {
+  text-align: center;
+}
+
+.mr-popo__message {
+  font-size: 24px;
+  font-family: 'Comic Sans';
+}
+
+.mr-popo-container {
+  
+}
+
+.mr-popo-container--large {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  background: black;
+}

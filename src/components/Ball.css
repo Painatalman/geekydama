@@ -12,8 +12,10 @@ $width: 75px;
 }
 
 .dragon-ball {
-  display: flex;
   margin: auto;
   width: $width;
+
+  fill: orange;
+
   animation: shoot 3s;
 }

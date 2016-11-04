@@ -51,10 +51,11 @@ module.exports = {
       include: path.join(__dirname, 'src')
     }] 
   },
+  resolve: {
+    alias: {vue: 'vue/dist/vue.js'}
+  },
   postcss: function() {
-    return [
-      require('postcss-simple-vars')({ /* ...options */ }),
-      require('autoprefixer')({ /* ...options */ })
-    ];
+    var plugins = require('./postcss.config.js').plugins;
+    return plugins;
   }
 };
