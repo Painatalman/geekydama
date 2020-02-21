@@ -1,3 +1,4 @@
+<style>
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -43,3 +44,28 @@
 .animation-delayed {
   animation: fade-in 20s ease-out;
 }
+</style>
+<script>
+import Ball from "~/components/Ball";
+import MrPopo from "~/components/MrPopo";
+
+export default {
+  components: {
+    "mr-popo": MrPopo,
+    ball: Ball
+  }
+};
+</script>
+<template>
+  <div class="page-splash">
+    <div class="page-splash__content">
+      <ball />
+      <div class="page-splash__content-message">
+        Coming Soon
+      </div>
+    </div>
+    <div class="animation-delayed">
+      <mr-popo />
+    </div>
+  </div>
+</template>

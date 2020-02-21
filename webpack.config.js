@@ -1,61 +1,79 @@
 // basic setup
-var path = require('path');
-var webpack = require('webpack');
+var path = require("path");
+var webpack = require("webpack");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
-// Webpack plugins
-var WebpackNotifierPlugin = require('webpack-notifier');
+const srcFolder = path.resolve(__dirname, "src");
 
 module.exports = {
-  entry: [
-    // 'webpack-dev-server/client?http://localhost:8080/',
-    // 'webpack/hot/only-dev-server',
-    path.resolve(__dirname, 'src/main.js')
-  ],
-   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+  entry: [path.resolve(srcFolder, "index.ts")],
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: "./dist"
   },
-  configFile: './.eslintrc',
-  devtool: 'source-map',
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    }),
-    // new webpack.optimize.DedupePlugin(),
-    // new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new WebpackNotifierPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ],
-  module: {
-    preloaders: [{
-      test: /\.s(a|c)ss$/,
-      loader: 'stylelint'
-    }],
-     loaders: [{
-      test: /.jsx?$/,
-      loader: 'babel-loader',
-      include: [
-        path.resolve(__dirname, 'src')
-      ]
-    }, {
-      test: /\.css$/,
-      loaders: [
-        'style-loader',
-        'css-loader?modules&importLoaders=1',
-        'postcss-loader'
-      ],
-      include: path.join(__dirname, 'src')
-    }] 
+  devtool: "#eval-source-map",
+  plugins: [new VueLoaderPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: "vue-loader"
+      },
+      {
+        test: /\.tsx?$/,
+        loader: "ts-loader",
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
+      },
+      {
+        test: /\.(png|jpg|gif|svg|woff(2)?|ttf|eot|otf)$/,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]"
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ["vue-style-loader", "css-loader", "postcss-loader"]
+      }
+    ]
   },
   resolve: {
-    alias: {vue: 'vue/dist/vue.js'}
+    extensions: [".ts", ".js", ".vue", ".json"],
+    alias: {
+      vue$: "vue/dist/vue.esm.js",
+      "~": srcFolder
+    }
   },
-  postcss: function() {
-    var plugins = require('./postcss.config.js').plugins;
-    return plugins;
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    port: 8080,
+    historyApiFallback: true
   }
 };
+
+if (process.env.NODE_ENV === "production") {
+  module.exports.devtool = "#source-map";
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  ]);
+}
