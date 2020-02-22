@@ -5,7 +5,7 @@
   "main": "dist/index.html",
   "scripts": {
     "watch": "webpack -d --watch",
-    "build": "webpack --production",
+    "build": "webpack --config webpack.config.prod.js",
     "build-dev": "webpack",
     "serve": "webpack-dev-server --inline",
     "start": "npm run serve",
@@ -41,6 +41,7 @@
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^4.2.1",
     "style-loader": "^0.13.1",
+    "terser-webpack-plugin": "^2.3.5",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "vue": "^2.6.11",
