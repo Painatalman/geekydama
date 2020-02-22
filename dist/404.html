@@ -7,11 +7,9 @@
       // - https://stackoverflow.com/a/50259501
       // - https://stackoverflow.com/a/50247140
       // ========================================
-      sessionStorage.redirect = `/${location.pathname.slice(1).split('/').slice(1).join('/')}`
+      sessionStorage.redirect = location.pathName
 
-      location.replace(
-        location.pathname.split('/').slice(0, 1 + segment).join('/')
-      )
+      location.replace('/')
     </script>
   </head>
 </html>
