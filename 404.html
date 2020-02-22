@@ -2,14 +2,11 @@
 <html>
   <head>
     <script>
-      // ========================================
-      // Credits:
-      // - https://stackoverflow.com/a/50259501
-      // - https://stackoverflow.com/a/50247140
-      // ========================================
-      sessionStorage.redirect = location.pathName
+      sessionStorage.redirect = location.pathname
 
       location.replace('/')
     </script>
+    <!-- some hack to get a 301 redirect, it seems https://www.smashingmagazine.com/2016/08/sghpa-single-page-app-hack-github-pages/#that-s-so-meta -->
+    <meta http-equiv="refresh" content="0;URL='/'">
   </head>
 </html>
