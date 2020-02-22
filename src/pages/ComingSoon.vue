@@ -28,8 +28,6 @@
 <style scoped>
 main {
   --container: var(--container-breakpont-min-lg);
-  --mascot-width-lg: 45%;
-  --mascot-width-md: 36%;
   --mascot-width: var(--mascot-width-lg);
   /* 140px in 1920x1080 screens */
   --font-size-base: 7.29169vw;
@@ -122,10 +120,7 @@ main {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: var(--mascot-width);
-}
-
-@media screen and (min-width: 1200px) {
+  width: 25vw;
 }
 </style>
 
