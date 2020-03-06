@@ -6,8 +6,8 @@
     <div class="layer layer--on-bottom">
       <div class="layer__content">
         <div class="layer__text">
-          O primeiro evento <br />
-          de Dragon ball <br />
+          O primeiro evento<br />
+          de Dragon ball<br />
           no Algarve
         </div>
         <footer class="layer__footnote">Mais informações brevemente</footer>
@@ -15,23 +15,24 @@
     </div>
     <div class="layer layer--for-mascot">
       <div class="layer__content">
-        <img
-          src="/img_dragon-fest_goku_desktop.png"
-          alt="SSJ Son Goku"
-          class="layer__content"
-        />
+        <picture>
+          <source
+            srcset="/img_dragon-fest_goku_mobile.png"
+            media="(orientation: portrait)"
+          />
+          <img
+            class="layer__mascot"
+            src="/img_dragon-fest_goku_desktop.png"
+            alt="SSJ Son Goku"
+          />
+        </picture>
       </div>
     </div>
   </main>
 </template>
 
-<style scoped>
-main {
-  --container: var(--container-breakpont-min-lg);
-  --mascot-width: var(--mascot-width-lg);
-  /* 140px in 1920x1080 screens */
-  --font-size-base: 7.29169vw;
-}
+<style>
+$screen-lg: 1025px;
 
 @font-face {
   src: url("/Knockout-HTF69-FullLiteweight.otf");
@@ -54,13 +55,25 @@ main {
   padding: 0;
 }
 
+html {
+  --font-size-base: 140px;
+  font-size: var(--font-size-base);
+
+  @media (max-width: $screen-lg) and (orientation: portrait) {
+    --font-size-base: 65px;
+  }
+
+  @media (max-width: $screen-lg) and (orientation: landscape) {
+    --font-size-base: 7vw;
+  }
+}
+
 main {
   display: flex;
   flex-direction: column;
   height: 100%;
 
   overflow: hidden;
-  font-size: var(--font-size-base);
 }
 
 .layer {
@@ -72,22 +85,42 @@ main {
   position: relative;
 
   margin: auto;
-  max-width: 65vw;
+  max-width: $screen-lg;
   width: 100%;
+
+  @media (max-width: $screen-lg) and (orientation: portrait) {
+    max-width: 85vw;
+  }
+
+  @media (max-width: $screen-lg) and (orientation: landscape) {
+    max-width: 85vw;
+  }
 }
 
 .layer__text {
   width: 60%;
+
+  @media (max-width: $screen-lg) and (orientation: portrait) {
+    width: 40%;
+
+    br {
+      display: none;
+    }
+  }
 }
 
 .layer--on-top {
-  flex: 2;
+  flex: 1.5;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 
   font-family: "Knockout";
-  font-size: 1em;
+  font-size: 1rem;
+
+  @media (orientation: portrait) {
+    flex: 1;
+  }
 }
 
 .layer--on-top .layer__content {
@@ -103,24 +136,39 @@ main {
 }
 
 .layer--on-bottom .layer__text {
-  font-size: 0.35714em;
+  font-size: 0.35714rem;
+
+  @media (max-width: $screen-lg) and (orientation: portrait) {
+    font-size: 0.2769rem;
+    line-height: 1.5;
+  }
 }
 
 .layer--on-bottom .layer__footnote {
   padding-top: 24px;
   font-family: "Knockout-jr";
-  font-size: 0.2286em;
+  font-size: 0.2286rem;
+
+  @media (max-width: $screen-lg) and (orientation: portrait) {
+    width: 40%;
+    padding-top: 16px;
+    font-size: 0.2462rem;
+  }
 }
 
 .layer--for-mascot {
   transform: none;
 }
 
-.layer--for-mascot .layer__content img {
+.layer--for-mascot .layer__mascot {
   position: absolute;
   bottom: 0;
   right: 0;
   width: 25vw;
+
+  @media (orientation: portrait) {
+    width: 50%;
+  }
 }
 </style>
 
@@ -129,6 +177,7 @@ require("~/fonts/Knockout-HTF29-JuniorLiteweight.otf");
 require("~/fonts/Knockout-HTF69-FullLiteweight.otf");
 require("~/fonts/Knockout-HTF72-FullCruiserwt.otf");
 require("~/images/img_dragon-fest_goku_desktop.png");
+require("~/images/img_dragon-fest_goku_mobile.png");
 
 export default {};
 </script>

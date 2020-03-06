@@ -1,6 +1,8 @@
 // basic setup
-var path = require("path");
+const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const commonModuleRules = require("./webpack/commonModuleRules");
+const devModuleRules = require("./webpack/devModuleRules");
 
 const srcFolder = path.resolve(__dirname, "src");
 
@@ -16,31 +18,7 @@ module.exports = {
   devtool: "#eval-source-map",
   plugins: [new VueLoaderPlugin()],
   module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: "vue-loader"
-      },
-      {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
-        exclude: /node_modules/,
-        options: {
-          appendTsSuffixTo: [/\.vue$/]
-        }
-      },
-      {
-        test: /\.(png|jpg|gif|svg|woff(2)?|ttf|eot|otf)$/,
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]"
-        }
-      },
-      {
-        test: /\.css$/,
-        use: ["vue-style-loader", "css-loader", "postcss-loader"]
-      }
-    ]
+    rules: [...commonModuleRules, ...devModuleRules]
   },
   resolve: {
     extensions: [".ts", ".js", ".vue", ".json"],
