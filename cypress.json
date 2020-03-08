@@ -1,4 +1,15 @@
 {
-  "baseUrl": "localhost:8080",
-  "video": false
+  "baseUrl": "http://localhost:8080",
+  "video": false,
+  "env": {
+    "pageSizes": [
+      "iphone-6",
+      "ipad-2",
+      ["ipad-2", "landscape"],
+      [800, 600],
+      [1280, 720],
+      [1366, 768],
+      [1920, 1080]
+    ]
+  }
 }
