@@ -12,7 +12,7 @@ module.exports = [
     }
   },
   {
-    test: /\.css$/,
+    test: /\.(post)?css$/,
     use: ["vue-style-loader", "css-loader", "postcss-loader"]
   },
   {

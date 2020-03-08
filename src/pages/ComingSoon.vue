@@ -31,7 +31,7 @@
   </main>
 </template>
 
-<style>
+<style lang="postcss" scoped>
 $screen-lg: 1025px;
 
 @font-face {
@@ -55,25 +55,22 @@ $screen-lg: 1025px;
   padding: 0;
 }
 
-html {
+main {
   --font-size-base: 140px;
+  --text-width: 60%;
+  --mascot-width: 25vw;
   font-size: var(--font-size-base);
 
-  @media (max-width: $screen-lg) and (orientation: portrait) {
-    --font-size-base: 65px;
-  }
-
-  @media (max-width: $screen-lg) and (orientation: landscape) {
-    --font-size-base: 7vw;
-  }
-}
-
-main {
   display: flex;
   flex-direction: column;
   height: 100%;
 
   overflow: hidden;
+
+  @media (max-width: $screen-lg) and (orientation: landscape) {
+    --font-size-base: 12vw;
+    --mascot-width: 30vw;
+  }
 }
 
 .layer {
@@ -88,25 +85,14 @@ main {
   max-width: $screen-lg;
   width: 100%;
 
-  @media (max-width: $screen-lg) and (orientation: portrait) {
-    max-width: 85vw;
-  }
-
-  @media (max-width: $screen-lg) and (orientation: landscape) {
-    max-width: 85vw;
+  @media screen and (orientation: landscape) {
+    width: 85vw;
   }
 }
 
-.layer__text {
-  width: 60%;
-
-  @media (max-width: $screen-lg) and (orientation: portrait) {
-    width: 40%;
-
-    br {
-      display: none;
-    }
-  }
+.layer__text,
+.layer__footnote {
+  width: var(--text-width);
 }
 
 .layer--on-top {
@@ -116,7 +102,7 @@ main {
   justify-content: flex-end;
 
   font-family: "Knockout";
-  font-size: 1rem;
+  font-size: 1em;
 
   @media (orientation: portrait) {
     flex: 1;
@@ -136,38 +122,57 @@ main {
 }
 
 .layer--on-bottom .layer__text {
-  font-size: 0.35714rem;
-
-  @media (max-width: $screen-lg) and (orientation: portrait) {
-    font-size: 0.2769rem;
-    line-height: 1.5;
-  }
+  font-size: 0.35714em;
 }
 
-.layer--on-bottom .layer__footnote {
+.layer__footnote {
   padding-top: 24px;
   font-family: "Knockout-jr";
-  font-size: 0.2286rem;
+  font-size: 0.2286em;
+}
 
-  @media (max-width: $screen-lg) and (orientation: portrait) {
-    width: 40%;
-    padding-top: 16px;
-    font-size: 0.2462rem;
-  }
+.layer__mascot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: var(--mascot-width);
 }
 
 .layer--for-mascot {
   transform: none;
 }
 
-.layer--for-mascot .layer__mascot {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 25vw;
+@media (max-width: $screen-lg) and (orientation: portrait) {
+  main {
+    --text-width: 40%;
+    --font-size-base: 65px;
+    --mascot-width: calc(95% - var(--text-width));
+  }
 
-  @media (orientation: portrait) {
-    width: 50%;
+  .layer__content {
+    max-width: 85vw;
+  }
+
+  .layer__text br {
+    display: none;
+  }
+
+  .layer--on-bottom .layer__text {
+    font-size: 0.2769em;
+    line-height: 1.5;
+  }
+
+  .layer__footnote {
+    width: var(--text-width);
+    padding-top: 16px;
+    /* SHAME: not sure why, but I think it matched 18px; */
+    font-size: 0.2462em;
+  }
+
+  .layer__mascot {
+    right: -5%;
+    max-width: none;
   }
 }
 </style>
