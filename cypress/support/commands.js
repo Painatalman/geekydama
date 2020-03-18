@@ -15,11 +15,3 @@ Cypress.Commands.add("setResolution", size => {
     cy.viewport(size);
   }
 });
-
-Cypress.Commands.add("getPageSizes", () => {
-  try {
-    return Cypress.env("pageSizes");
-  } catch {
-    throw new Error('Do you have "env.pageSizes" set up in your config file?');
-  }
-});
