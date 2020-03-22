@@ -1,4 +1,5 @@
 <style lang="postcss" scoped>
+$screen-md: 768px;
 $screen-lg: 1025px;
 $screen-xl: 1440px;
 
@@ -105,7 +106,7 @@ main {
   height: 90vh;
 }
 
-@media (max-width: $screen-lg) and (orientation: portrait) {
+@media (max-width: $screen-md) and (orientation: portrait) {
   $content-padding-v: 20px;
 
   main {
@@ -124,6 +125,12 @@ main {
     padding-top: 24px;
     /* SHAME: not sure why, but I think it matched 18px; */
     font-size: 0.2462em;
+  }
+
+  .layer__mascot {
+    max-width: none;
+    height: auto;
+    width: calc(100% - var(--text-width) + $content-padding-v);
   }
 
   .layer__text br {
