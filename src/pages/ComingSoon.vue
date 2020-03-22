@@ -126,12 +126,6 @@ main {
     font-size: 0.2462em;
   }
 
-  .layer__mascot {
-    max-width: none;
-    height: auto;
-    width: calc(100% - var(--text-width) + $content-padding-v);
-  }
-
   .layer__text br {
     display: none;
   }
