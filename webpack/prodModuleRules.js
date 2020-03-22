@@ -8,7 +8,13 @@ module.exports = [
           name: "[name].[ext]"
         }
       },
-      "image-webpack-loader"
+      {
+        loader: "image-webpack-loader",
+	options: {
+	  optipng: { enabled: false },
+	  pngquant: { enabled: false}
+	}	
+      }
     ]
   }
 ];
